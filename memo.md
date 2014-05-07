@@ -1,11 +1,12 @@
+## install gulp-plugin
 
+  npm init
+  npm install --save-dev gulp-markdown
+  npm install --save-dev gulp-markdown-pdf
+  npm install --save-dev gulp-clean
 
-== install gulp-plugin
+## add gulpfile.js
 
-npm init
-npm install --save-dev gulp-markdown
-npm install --save-dev gulp-markdown-pdf
-npm install --save-dev gulp-clean
-
+  ./node_modules/.bin/gulp
 
 
