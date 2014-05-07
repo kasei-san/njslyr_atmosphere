@@ -1,0 +1,17 @@
+{
+  "name": "uso_japan",
+  "version": "0.0.0",
+  "description": "** SETUP",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "WTFPL",
+  "devDependencies": {
+    "gulp": "^3.6.2",
+    "gulp-clean": "^0.2.4",
+    "gulp-markdown": "^0.1.2",
+    "gulp-markdown-pdf": "^0.2.0"
+  }
+}
