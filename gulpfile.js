@@ -27,7 +27,7 @@ gulp.task('bookCover', function () {
   console.log("bookCover");
   console.log(options);
 
-  return gulp.src('markdown/cover/00_top.md')
+  return gulp.src('markdown/cover/*')
     .pipe(markdownpdf(options))
     .pipe(gulp.dest('dist/pdf/'));
 });
