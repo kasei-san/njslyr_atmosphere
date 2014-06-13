@@ -143,6 +143,7 @@ gulp.task('beforeBodyPdf', function () {
 gulp.task('bodyPdf', function () {
   var options = {};
   options.cssPath = path.join(cd(), "css", "pdf", "body.css");
+  options.runningsPath = path.resolve('markdown-pdf/runnings.js')
 
   return gulp.src('dist/markdown/pdf/*.md')
     .pipe(markdownpdf(options))
