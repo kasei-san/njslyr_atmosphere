@@ -34,8 +34,14 @@ gulp.task('html', ['html-css', 'html-image'], function () {
 
 gulp.task('markdownToHtml', function () {
   return gulp.src('dist/markdown/html/*.md')
+    // add YouTube player
     .pipe(markdown())
-    // js で、ファイルの末尾を指定した、replace のやり方がわからない...
+    .pipe(
+      replace(
+        /<p><a href="https:\/\/www\.youtube\.com\/watch\?v=(.*)">.*<\/a><\/p>/g,
+        '<iframe width="560" height="315" src="http://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>'
+      )
+    )
     .pipe(
       tap(function (file) {
 
