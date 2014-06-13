@@ -8,6 +8,14 @@ h1,h2{
   margin-bottom: 1em;
 }
 
+div.about{
+  font-size: 0.75em;
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid;
+  background-color: #FEA;
+}
+
 div.main{
   width: 80%;
   margin: 0 auto;
