@@ -50,7 +50,7 @@ gulp.task('beforeBodyPdf', function () {
     var imgdir = path.join(cd(), "img", filename.replace(".md", '').replace(/\d+_/, ''));
     console.log(imgdir);
     file.contents = new Buffer(
-      String(file.contents).replace(/\b.*jpg/, imgdir + "/$&")
+      String(file.contents).replace(/\w+\.jpg/g, imgdir + "/$&")
     );
   }
 
