@@ -28,7 +28,7 @@ gulp.task('htmlAndPdf', ['html', 'pdf']);
 //-------------------------------------------------------------------------
 // markdown to html
 //-------------------------------------------------------------------------
-gulp.task('html', ['html-css', 'html-js', 'html-image'], function () {
+gulp.task('html', ['html-css', 'html-image'], function () {
   runSequence('beforeBodyHtml', 'markdownToHtml');
 });
 
@@ -46,10 +46,8 @@ gulp.task('markdownToHtml', function () {
 '<html lang="en">' + "\n" +
 '  <head>' + "\n" +
 '    <meta charset="utf-8">' + "\n" +
-'    <meta http-equiv="X-UA-Compatible" content="IE=edge">' + "\n" +
 '    <meta name="viewport" content="width=device-width, initial-scale=1">' + "\n" +
 '    <title>' + title + ' | かせいさん @ ウソ日本ネタ紹介本</title>' + "\n" +
-'    <link href="css/bootstrap.min.css" rel="stylesheet">' + "\n" +
 '    <link href="css/style.css" rel="stylesheet">' + "\n" +
 '      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>' + "\n" +
 '      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>' + "\n" +
@@ -109,11 +107,6 @@ gulp.task('beforeBodyHtml', function () {
 gulp.task('html-css', function () {
   return gulp.src('style_and_js/html/css/*.css')
     .pipe(gulp.dest('dist/html/css'));
-});
-
-gulp.task('html-js', function () {
-  return gulp.src('style_and_js/html/js/*.js')
-    .pipe(gulp.dest('dist/html/js'));
 });
 
 gulp.task('html-image', function () {
