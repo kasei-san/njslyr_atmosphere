@@ -25,7 +25,9 @@ gulp.task('deploy', function () {
 
 gulp.task('htmlAndPdf', ['html', 'pdf']);
 
+//-------------------------------------------------------------------------
 // markdown to html
+//-------------------------------------------------------------------------
 gulp.task('html', ['html-css', 'html-js', 'html-image'], function () {
   runSequence('beforeBodyHtml', 'markdownToHtml');
 });
@@ -84,7 +86,6 @@ gulp.task('markdownToHtml', function () {
     .pipe(gulp.dest('dist/html'));
 });
 
-// before markdown to pdf
 gulp.task('beforeBodyHtml', function () {
 
   function replaceImgTag(file) {
@@ -120,7 +121,9 @@ gulp.task('html-image', function () {
     .pipe(gulp.dest('dist/html/image'));
 });
 
+//-------------------------------------------------------------------------
 // markdown to pdf
+//-------------------------------------------------------------------------
 gulp.task('pdf', function () {
   runSequence('bookCoverPdf', 'beforeBodyPdf', 'bodyPdf');
 });
@@ -140,7 +143,6 @@ gulp.task('bookCoverPdf', function () {
     .pipe(gulp.dest('dist/pdf/'));
 });
 
-// before markdown to pdf
 gulp.task('beforeBodyPdf', function () {
 
   function replaceImgTag(file) {
@@ -161,22 +163,18 @@ gulp.task('beforeBodyPdf', function () {
     // add YouTube image
     .pipe(replace(/https:\/\/www\.youtube\.com\/watch\?v=(.*)/g, "![](http://i.ytimg.com/vi/$1/0.jpg)\n$&"))
 
-
     // QRcode to HTML ver
     .pipe(
       tap(function (file) {
          file.contents = new Buffer(
            String(file.contents) +
              "\n\n![](http://chart.apis.google.com/chart?chs=100x100&cht=qr&chl=http://kasei-san.github.io/njslyr_atmosphere/" + path.basename(file.path).replace(".md", ".html") + ")" +
-             " ← このページのHTML版へ!"
+             " <- このページのHTML版へ!"
          );
       })
     )
 
 
-
-    // add QR code on link tag
-    //.pipe(replace(/[^!]\[.*\]\((.*)\)/g, '$&\n![](http://chart.apis.google.com/chart?chs=150x150&cht=qr&chl=$1)'))
     .pipe(gulp.dest('dist/markdown/pdf/'));
 });
 
