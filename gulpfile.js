@@ -23,7 +23,7 @@ gulp.task('html', function () {
 
 // markdown to pdf
 gulp.task('pdf', function () {
-  runSequence('clean', 'bookCoverPdf', 'beforePdf', 'bodyPdf');
+  runSequence('clean', 'bookCoverPdf', 'beforeBodyPdf', 'bodyPdf');
 });
 
 // cleanup dist dir
@@ -42,12 +42,13 @@ gulp.task('bookCoverPdf', function () {
 });
 
 // before markdown to pdf
-gulp.task('beforePdf', function () {
+gulp.task('beforeBodyPdf', function () {
 
   function replaceImgTag(file) {
     // replace img tag
     var filename = path.basename(file.path);
-    var imgdir = path.join(cd(), "img", filename.replace(".md", ''))
+    var imgdir = path.join(cd(), "img", filename.replace(".md", '').replace(/\d+_/, ''));
+    console.log(imgdir);
     file.contents = new Buffer(
       String(file.contents).replace(/\b.*jpg/, imgdir + "/$&")
     );
