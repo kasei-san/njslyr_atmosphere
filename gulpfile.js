@@ -160,6 +160,21 @@ gulp.task('beforeBodyPdf', function () {
     )
     // add YouTube image
     .pipe(replace(/https:\/\/www\.youtube\.com\/watch\?v=(.*)/g, "![](http://i.ytimg.com/vi/$1/0.jpg)\n$&"))
+
+
+    // QRcode to HTML ver
+    .pipe(
+      tap(function (file) {
+         file.contents = new Buffer(
+           String(file.contents) +
+             "\n\n![](http://chart.apis.google.com/chart?chs=100x100&cht=qr&chl=http://kasei-san.github.io/njslyr_atmosphere/" + path.basename(file.path).replace(".md", ".html") + ")" +
+             " ← このページのHTML版へ!"
+         );
+      })
+    )
+
+
+
     // add QR code on link tag
     //.pipe(replace(/[^!]\[.*\]\((.*)\)/g, '$&\n![](http://chart.apis.google.com/chart?chs=150x150&cht=qr&chl=$1)'))
     .pipe(gulp.dest('dist/markdown/pdf/'));
