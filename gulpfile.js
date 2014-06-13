@@ -19,7 +19,7 @@ gulp.task('default', function (){
 });
 
 gulp.task('deploy', function () {
-    return gulp.src("./dist/html/**/*")
+    return gulp.src(["./dist/html/**/*", "./dist/pdf/02_busido_coffee.pdf"])
         .pipe(deploy());
 });
 
