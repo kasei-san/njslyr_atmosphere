@@ -27,20 +27,35 @@ gulp.task('html', ['html-css', 'html-js', 'html-image'], function () {
 gulp.task('markdownToHtml', function () {
   return gulp.src('dist/markdown/html/*.md')
     .pipe(markdown())
-    .pipe(replace(/<h1.*>(.*)<\/h1>/,
-'<!DOCTYPE html>' +
-'<html lang="en">' +
-'  <head>' +
-'    <meta charset="utf-8">' +
-'    <meta http-equiv="X-UA-Compatible" content="IE=edge">' +
-'    <meta name="viewport" content="width=device-width, initial-scale=1">' +
-'    <title>$1</title>' +
-'    <!-- Bootstrap -->' +
-'    <link href="css/bootstrap.min.css" rel="stylesheet">' +
-'      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>' +
-'      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>' +
-'    <![endif]-->' +
-'  </head><body><div style="padding:1em;">' + "$&"))
+    // js で、ファイルの末尾を指定した、replace のやり方がわからない...
+    .pipe(
+      tap(function (file) {
+
+        var title = String(file.contents).match(/<h1.*>(.*)<\/h1>/)[1];
+
+        file.contents = new Buffer(
+'<!DOCTYPE html>' + "\n" +
+'<html lang="en">' + "\n" +
+'  <head>' + "\n" +
+'    <meta charset="utf-8">' + "\n" +
+'    <meta http-equiv="X-UA-Compatible" content="IE=edge">' + "\n" +
+'    <meta name="viewport" content="width=device-width, initial-scale=1">' + "\n" +
+'    <title>' + title + '</title>' + "\n" +
+'    <link href="css/bootstrap.min.css" rel="stylesheet">' + "\n" +
+'    <link href="css/style.css" rel="stylesheet">' + "\n" +
+'      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>' + "\n" +
+'      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>' + "\n" +
+'    <![endif]-->' + "\n" +
+'  </head><body><div class="main"">' + "\n" +
+     String(file.contents) +
+'  <div class="footer">' + "\n" +
+'    <div>かせいさん @ ウソ日本ネタ紹介本</div>' + "\n" +
+'    <div><a href="./01_maegaki.html">about</a><div>' + "\n" +
+'  </div>' + "\n" +
+'  </html>'
+        );
+      })
+    )
     .pipe(gulp.dest('dist/html'));
 });
 
@@ -66,12 +81,12 @@ gulp.task('beforeBodyHtml', function () {
 });
 
 gulp.task('html-css', function () {
-  return gulp.src('bootstrap/css/*.css')
+  return gulp.src('style_and_js/html/css/*.css')
     .pipe(gulp.dest('dist/html/css'));
 });
 
 gulp.task('html-js', function () {
-  return gulp.src('bootstrap/js/*.js')
+  return gulp.src('style_and_js/html/js/*.js')
     .pipe(gulp.dest('dist/html/js'));
 });
 

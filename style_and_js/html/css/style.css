@@ -1,0 +1,30 @@
+
+body{
+  width: 100%;
+  background-color: #000;
+}
+
+h1,h2{
+  margin-bottom: 1em;
+}
+
+div.main{
+  width: 80%;
+  margin: 0 auto;
+  background-color: #FFF;
+  padding-top: 3em;
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
+div.footer {
+  margin-top: 2em;
+  padding: 1em;
+  border-top: 1px solid;
+  text-align:center;
+}
+
+div.footer a:link    { color: #555; }
+div.footer a:visited { color: #555; }
+div.footer a:hover   { color: #555; }
+div.footer a:active  { color: #555; }
