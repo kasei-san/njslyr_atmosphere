@@ -6,6 +6,7 @@ var markdownpdf = require('gulp-markdown-pdf');
 var clean       = require('gulp-clean');
 var runSequence = require('run-sequence');
 var replace     = require('gulp-replace');
+var deploy      = require("gulp-gh-pages");
 
 function cd(){
   var fs = require('fs');
@@ -15,6 +16,11 @@ function cd(){
 // default task do clean, html and pdf task
 gulp.task('default', function (){
   runSequence('clean', 'htmlAndPdf');
+});
+
+gulp.task('deploy', function () {
+    return gulp.src("./dist/html/**/*")
+        .pipe(deploy());
 });
 
 gulp.task('htmlAndPdf', ['html', 'pdf']);
