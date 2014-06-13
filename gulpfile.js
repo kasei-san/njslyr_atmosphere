@@ -54,6 +54,10 @@ gulp.task('markdownToHtml', function () {
 '    <![endif]-->' + "\n" +
 '  </head><body><div class="main"">' + "\n" +
 
+' <div class="about"> ' + "\n" +
+'このページは、<a href="https://twitter.com/kasei_san">かせいさん</a>が、<a href="http://nin89.webcrow.jp/">ニンジャ万博</a>の為に作った、忍殺的アトモスフィア紹介本の HTML バージョンです' + "\n" +
+' </div> ' + "\n" +
+
      String(file.contents) +
 
 '<div class="ninja_onebutton">' + "\n" +
