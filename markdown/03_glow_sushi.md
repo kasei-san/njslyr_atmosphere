@@ -14,7 +14,8 @@
 ![Kryptonite Roll](kryptonite_roll.jpg)
 
 ## 作り方の動画
-http://www.youtube.com/?v=YQz60FBTfts
+
+https://www.youtube.com/watch?v=YQz60FBTfts
 
 [GloFish](http://www.glofish.com/)という通販で買える遺伝子組み換え熱帯魚を使い、作っているようだ
 

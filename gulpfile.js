@@ -54,10 +54,18 @@ gulp.task('beforeBodyPdf', function () {
     );
   }
 
+  function addYoutubeImage(file) {
+    //http://i.ytimg.com/vi/764gmzb8ac0/hqdefault.jpg
+    file.contents = new Buffer(
+      String(file.contents).replace(/https:\/\/www\.youtube\.com\/watch\?v=(.*)/g, "![](http://i.ytimg.com/vi/$1/0.jpg)\n$&")
+    );
+  }
+
   return gulp.src('markdown/*.md')
     .pipe(
       tap(function (file) {
         replaceImgTag(file);
+        addYoutubeImage(file);
       })
     )
     .pipe(gulp.dest('dist/markdown/pdf/'));
