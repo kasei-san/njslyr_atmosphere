@@ -5,6 +5,6 @@
 
     $ npm install
 
-## How to use1
+## How to use
 
     $ ./node_modules/.bin/gulp
