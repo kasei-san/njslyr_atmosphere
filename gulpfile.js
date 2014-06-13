@@ -5,6 +5,7 @@ var markdown    = require('gulp-markdown');
 var markdownpdf = require('gulp-markdown-pdf');
 var clean       = require('gulp-clean');
 var runSequence = require('run-sequence');
+var replace     = require('gulp-replace');
 
 function cd(){
   var fs = require('fs');
@@ -48,16 +49,8 @@ gulp.task('beforeBodyPdf', function () {
     // replace img tag
     var filename = path.basename(file.path);
     var imgdir = path.join(cd(), "img", filename.replace(".md", '').replace(/\d+_/, ''));
-    console.log(imgdir);
     file.contents = new Buffer(
       String(file.contents).replace(/\w+\.(png|jpg)/g, imgdir + "/$&")
-    );
-  }
-
-  function addYoutubeImage(file) {
-    //http://i.ytimg.com/vi/764gmzb8ac0/hqdefault.jpg
-    file.contents = new Buffer(
-      String(file.contents).replace(/https:\/\/www\.youtube\.com\/watch\?v=(.*)/g, "![](http://i.ytimg.com/vi/$1/0.jpg)\n$&")
     );
   }
 
@@ -65,9 +58,12 @@ gulp.task('beforeBodyPdf', function () {
     .pipe(
       tap(function (file) {
         replaceImgTag(file);
-        addYoutubeImage(file);
       })
     )
+    // add YouTube image
+    .pipe(replace(/https:\/\/www\.youtube\.com\/watch\?v=(.*)/g, "![](http://i.ytimg.com/vi/$1/0.jpg)\n$&"))
+    // add QR code on link tag
+    //.pipe(replace(/[^!]\[.*\]\((.*)\)/g, '$&\n![](http://chart.apis.google.com/chart?chs=150x150&cht=qr&chl=$1)'))
     .pipe(gulp.dest('dist/markdown/pdf/'));
 });
 
