@@ -4,6 +4,7 @@ var path        = require('path');
 var markdown    = require('gulp-markdown');
 var markdownpdf = require('gulp-markdown-pdf');
 var clean       = require('gulp-clean');
+var runSequence = require('run-sequence');
 
 function cd(){
   var fs = require('fs');
@@ -20,12 +21,20 @@ gulp.task('html', function () {
     .pipe(gulp.dest('dist/html'));
 });
 
+// markdown to pdf
+gulp.task('pdf', function () {
+  runSequence('clean', 'bookCoverPdf', 'beforePdf', 'bodyPdf');
+});
 
-gulp.task('bookCover', function () {
+// cleanup dist dir
+gulp.task('clean', function () {
+  return gulp.src('dist')
+    .pipe(clean());
+});
+
+gulp.task('bookCoverPdf', function () {
   var options = {};
-  options.cssPath = path.join(cd(), "css", "cover.css");
-  console.log("bookCover");
-  console.log(options);
+  options.cssPath = path.join(cd(), "css", "pdf", "cover.css");
 
   return gulp.src('markdown/cover/*')
     .pipe(markdownpdf(options))
@@ -53,15 +62,11 @@ gulp.task('beforePdf', function () {
     .pipe(gulp.dest('dist/markdown/pdf/'));
 });
 
-// markdown to pdf
-gulp.task('pdf', function () {
-  return gulp.src('dist/markdown/pdf/*.md')
-    .pipe(markdownpdf())
-    .pipe(gulp.dest('dist/pdf'));
-});
+gulp.task('bodyPdf', function () {
+  var options = {};
+  options.cssPath = path.join(cd(), "css", "pdf", "body.css");
 
-// cleanup dist dir
-gulp.task('clean', function () {
-  return gulp.src('dist')
-    .pipe(clean());
+  return gulp.src('dist/markdown/pdf/*.md')
+    .pipe(markdownpdf(options))
+    .pipe(gulp.dest('dist/pdf'));
 });

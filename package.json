@@ -13,6 +13,7 @@
     "gulp-clean": "^0.2.4",
     "gulp-markdown": "^0.1.2",
     "gulp-markdown-pdf": "^0.2.0",
-    "gulp-tap": "^0.1.1"
+    "gulp-tap": "^0.1.1",
+    "run-sequence": "^0.3.6"
   }
 }
