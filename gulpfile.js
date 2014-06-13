@@ -46,14 +46,29 @@ gulp.task('markdownToHtml', function () {
 '    <meta charset="utf-8">' + "\n" +
 '    <meta http-equiv="X-UA-Compatible" content="IE=edge">' + "\n" +
 '    <meta name="viewport" content="width=device-width, initial-scale=1">' + "\n" +
-'    <title>' + title + '</title>' + "\n" +
+'    <title>' + title + ' | かせいさん @ ウソ日本ネタ紹介本</title>' + "\n" +
 '    <link href="css/bootstrap.min.css" rel="stylesheet">' + "\n" +
 '    <link href="css/style.css" rel="stylesheet">' + "\n" +
 '      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>' + "\n" +
 '      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>' + "\n" +
 '    <![endif]-->' + "\n" +
 '  </head><body><div class="main"">' + "\n" +
+
      String(file.contents) +
+
+'<div class="ninja_onebutton">' + "\n" +
+'<script type="text/javascript">' + "\n" +
+'//<![CDATA[' + "\n" +
+'(function(d){' + "\n" +
+'if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_a0f0ac6773e1222899f6490749415969)==\'undefined\'){' + "\n" +
+'    document.write("<sc"+"ript type=\'text\/javascript\' src=\'http:\/\/omt.shinobi.jp\/b\/a0f0ac6773e1222899f6490749415969\'><\/sc"+"ript>");' + "\n" +
+'}else{ ' + "\n" +
+'    window.NINJA_CO_JP_ONETAG_BUTTON_a0f0ac6773e1222899f6490749415969.ONETAGButton_Load();}' + "\n" +
+'})(document);' + "\n" +
+'//]]>' + "\n" +
+'</script><span class="ninja_onebutton_hidden" style="display:none;"></span><span style="display:none;" class="ninja_onebutton_hidden"></span>' + "\n" +
+'</div>' + "\n" +
+
 '  <div class="footer">' + "\n" +
 '    <div>かせいさん @ ウソ日本ネタ紹介本</div>' + "\n" +
 '    <div><a href="./01_maegaki.html">about</a><div>' + "\n" +
