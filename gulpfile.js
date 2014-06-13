@@ -5,6 +5,11 @@ var markdown    = require('gulp-markdown');
 var markdownpdf = require('gulp-markdown-pdf');
 var clean       = require('gulp-clean');
 
+function cd(){
+  var fs = require('fs');
+  return fs.realpathSync('./');
+}
+
 // default task do clean, html and pdf task
 gulp.task('default', ['clean', 'html', 'pdf']);
 
@@ -15,13 +20,20 @@ gulp.task('html', function () {
     .pipe(gulp.dest('dist/html'));
 });
 
+
+gulp.task('bookCover', function () {
+  var options = {};
+  options.cssPath = path.join(cd(), "css", "cover.css");
+  console.log("bookCover");
+  console.log(options);
+
+  return gulp.src('markdown/cover/00_top.md')
+    .pipe(markdownpdf(options))
+    .pipe(gulp.dest('dist/pdf/'));
+});
+
 // before markdown to pdf
 gulp.task('beforePdf', function () {
-
-  function cd(){
-    var fs = require('fs');
-    return fs.realpathSync('./');
-  }
 
   function replaceImgTag(file) {
     // replace img tag
