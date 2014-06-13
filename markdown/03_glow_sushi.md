@@ -10,6 +10,8 @@
 ## Stop and Glow Nigirizushi
 ![Stop and Glow Nigirizushi](stop_and_glow_nigirizushi.jpg)
 
+<div style="page-break-after: always;"></div>
+
 ## Kryptonite Roll
 ![Kryptonite Roll](kryptonite_roll.jpg)
 
