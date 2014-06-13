@@ -13,18 +13,76 @@ function cd(){
 }
 
 // default task do clean, html and pdf task
-gulp.task('default', ['clean', 'html', 'pdf']);
+gulp.task('default', function (){
+  runSequence('clean', 'htmlAndPdf');
+});
+
+gulp.task('htmlAndPdf', ['html', 'pdf']);
 
 // markdown to html
-gulp.task('html', function () {
-  return gulp.src('dist/markdown/*.md')
+gulp.task('html', ['html-css', 'html-js', 'html-image'], function () {
+  runSequence('beforeBodyHtml', 'markdownToHtml');
+});
+
+gulp.task('markdownToHtml', function () {
+  return gulp.src('dist/markdown/html/*.md')
     .pipe(markdown())
+    .pipe(replace(/<h1.*>(.*)<\/h1>/,
+'<!DOCTYPE html>' +
+'<html lang="en">' +
+'  <head>' +
+'    <meta charset="utf-8">' +
+'    <meta http-equiv="X-UA-Compatible" content="IE=edge">' +
+'    <meta name="viewport" content="width=device-width, initial-scale=1">' +
+'    <title>$1</title>' +
+'    <!-- Bootstrap -->' +
+'    <link href="css/bootstrap.min.css" rel="stylesheet">' +
+'      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>' +
+'      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>' +
+'    <![endif]-->' +
+'  </head><body><div style="padding:1em;">' + "$&"))
     .pipe(gulp.dest('dist/html'));
+});
+
+// before markdown to pdf
+gulp.task('beforeBodyHtml', function () {
+
+  function replaceImgTag(file) {
+    // replace img tag
+    var filename = path.basename(file.path);
+    var imgdir = "./image/" + filename.replace(".md", '').replace(/\d+_/, '');
+    file.contents = new Buffer(
+      String(file.contents).replace(/\w+\.(png|jpg)/g, imgdir + "/$&")
+    );
+  }
+
+  return gulp.src('markdown/*.md')
+    .pipe(
+      tap(function (file) {
+        replaceImgTag(file);
+      })
+    )
+    .pipe(gulp.dest('dist/markdown/html/'));
+});
+
+gulp.task('html-css', function () {
+  return gulp.src('bootstrap/css/*.css')
+    .pipe(gulp.dest('dist/html/css'));
+});
+
+gulp.task('html-js', function () {
+  return gulp.src('bootstrap/js/*.js')
+    .pipe(gulp.dest('dist/html/js'));
+});
+
+gulp.task('html-image', function () {
+  return gulp.src('img/**/*.*')
+    .pipe(gulp.dest('dist/html/image'));
 });
 
 // markdown to pdf
 gulp.task('pdf', function () {
-  runSequence('clean', 'bookCoverPdf', 'beforeBodyPdf', 'bodyPdf');
+  runSequence('bookCoverPdf', 'beforeBodyPdf', 'bodyPdf');
 });
 
 // cleanup dist dir
