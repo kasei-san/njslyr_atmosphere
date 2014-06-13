@@ -48,4 +48,4 @@ BUSHIDOは、ヨーロッパのコーヒー文化、革新的な業績および�
 BUSHIDOは、全てスイスで生産されます
 ```
 
-[About our company | Bushido](https://bushido-coffee.com/en/about-our-company)
+- [About our company | Bushido](https://bushido-coffee.com/en/about-our-company)
