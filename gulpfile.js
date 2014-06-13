@@ -129,7 +129,7 @@ gulp.task('clean', function () {
 
 gulp.task('bookCoverPdf', function () {
   var options = {};
-  options.cssPath = path.join(cd(), "css", "pdf", "cover.css");
+  options.cssPath = path.join(cd(), "style_and_js", "pdf", "css", "cover.css");
 
   return gulp.src('markdown/cover/*')
     .pipe(markdownpdf(options))
@@ -167,13 +167,12 @@ gulp.task('beforeBodyPdf', function () {
       })
     )
 
-
     .pipe(gulp.dest('dist/markdown/pdf/'));
 });
 
 gulp.task('bodyPdf', function () {
   var options = {};
-  options.cssPath = path.join(cd(), "css", "pdf", "body.css");
+  options.cssPath = path.join(cd(), "style_and_js", "pdf", "css", "body.css");
   options.runningsPath = path.resolve('markdown-pdf/runnings.js')
 
   return gulp.src('dist/markdown/pdf/*.md')

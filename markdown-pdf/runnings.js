@@ -3,7 +3,7 @@ exports.header = null;
 exports.footer = {
   height   : "2cm",
   contents : function(pageNum, numPages) {
-    return '<div style="' +
+    return '<div>　</div><div style="' +
         "border-top: 1px solid;" +
         'font-family: Osaka, sans-serif;' +
         "margin-top: 1em;" +

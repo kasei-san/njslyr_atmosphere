@@ -1,5 +1,8 @@
 body{
-  padding: 8em, 2em;
+  margin-top: 4em;
+  margin-bottom: 4em;
+  margin-left: 2em;
+  margin-right: 2em;
   font-size: 1em;
 }
 h1{
